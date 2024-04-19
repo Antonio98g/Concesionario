@@ -1,26 +1,31 @@
-package portafoliopoo;
+package portafoliopoo; //Agrupa las clases
+
+
 
 public class ListaDeAutos {
-    private Auto inicio;
-    private Auto fin;
+    private Auto inicio; //Referencia al primer auto en la lista
+    private Auto fin; // Referencia al ultimo auto en la lista
 
+    //Constructor lista
     public ListaDeAutos() {
     }
 
+
+    //Getters y setters
     public Auto getInicio() {
-        return inicio;
+        return inicio; // Obtiene el primer auto de la lista
     }
 
     public void setInicio(Auto inicio) {
-        this.inicio = inicio;
+        this.inicio = inicio; //Establece el primer auto de la lista
     }
 
     public Auto getFin() {
-        return fin;
+        return fin; //Obtiene el ultimo auto de la lista
     }
 
     public void setFin(Auto fin) {
-        this.fin = fin;
+        this.fin = fin; //Establece el ultimo auto de la lista
     }
 
     //método para dar de alta un nuevo auto
