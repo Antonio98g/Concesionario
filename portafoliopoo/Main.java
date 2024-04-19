@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * La clase Main contiene el método main que permite interactuar con la lista de autos.
- * Permite al usuario realizar diversas operaciones como agregar autos, mostrar información de autos, comprar, devolver y buscar autos, etc.
+ * Permite a los usuarios (concesionario y cliente) realizar diversas operaciones como agregar autos, mostrar información de autos, comprar y devolver autos, etc.
  */
 public class Main {
 
@@ -14,75 +14,124 @@ public class Main {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         ListaDeAutos lista = new ListaDeAutos();
-        int opc;
+        int opc, op;
         String modelo,marca, cliente;
-
+        
         do{
             System.out.println("Menu");
-            System.out.println("1.Agregar Auto");
-            System.out.println("2.Mostrar todos los Autos");
-            System.out.println("3.Mostrar Autos Vendidos");
-            System.out.println("4.Mostrar Autos Disponibles");
-            System.out.println("5.Vender Auto");
-            System.out.println("6.Devolver Auto");
-            System.out.println("7.Buscar Auto");
-            System.out.println("8.Salir");
-            opc = leer.nextInt();
-            switch(opc){
-                case 1 -> {
-                    // Agrega un nuevo auto al stock
-                    System.out.println("1.Agregar un Auto");
-                    System.out.println("Ingresa Modelo: ");
-                    modelo = leer.next();
-                    System.out.println("Ingresa la Marca: ");
-                    marca = leer.next();
-                    lista.insertar (modelo,marca);
+            System.out.println("Seleccione el tipo de usuario");
+            System.out.println("1.Concesionario");
+            System.out.println("2.Cliente");
+            System.out.println("3.Salir");
+            op = leer.nextInt();
+            switch(op){
+                case 1-> {
+                    //concesionario
+                     do{
+                        System.out.println("Menu");
+                        System.out.println("1.Agregar Auto");
+                        System.out.println("2.Mostrar todos los Autos");
+                        System.out.println("3.Mostrar Autos Vendidos");
+                        System.out.println("4.Mostrar Autos Disponibles");
+                        System.out.println("5.Salir");
+                        opc = leer.nextInt();
+                        switch(opc){
+                            case 1 -> {
+                                //el vendedor agrega un nuevo auto al stock
+                                System.out.println("1.Agregar un Auto");
+                                System.out.println("Ingresa Modelo: ");
+                                modelo = leer.next();
+                                System.out.println("Ingresa la Marca: ");
+                                marca = leer.next();
+                                lista.insertar (modelo,marca);
+                            }
+                            //muestra todos los autos, incluso los que no están disponibles
+                            case 2 -> {
+                                System.out.println("2.Mostrar todos los Autos");
+                                lista.mostrar();
+                            }
+                            //excluye los autos que aún no se venden
+                            case 3 -> {
+                                System.out.println("3.Mostrar Autos Vendidos");
+                                lista.autosVendidos();
+                            }
+                            //excluye los autos que ya se vendieron
+                            case 4 -> {
+                                System.out.println("4.Mostrar Autos Disponibles");
+                                System.out.println("2.Eliminar primero");
+                                lista.autosDisponibles();
+                            }
+                            //sale del menú del concesionario
+                            case 5 -> {
+                                System.out.println("bye bye");
+                            }
+                            //en caso de que le ingrese una opcion que no sea válida
+                            default -> System.out.println("Opcion invalida");
+                            }
+                    }while(opc!=5);
                 }
-                case 2 -> {
-                    // Muestra todos los autos en el stock
-                    System.out.println("2.Mostrar todos los Autos");
-                    lista.mostrar();
+                case 2-> {
+                    //cliente
+                    do{
+                        System.out.println("Menu");
+                        System.out.println("1.Mostrar todos los Autos");
+                        System.out.println("2.Mostrar Autos Disponibles");
+                        System.out.println("3.Comprar Auto");
+                        System.out.println("4.Devolver Auto");
+                        System.out.println("5.Bucar Auto");
+                        System.out.println("6.Salir");
+                        opc = leer.nextInt();
+                        switch(opc){
+                            case 1 -> {
+                                //se muestran todos los autos incluso los que ya se vendieron
+                                System.out.println("1.Mostrar todos los Autos");
+                                lista.mostrar();
+                            }
+                            case 2 -> {
+                                //se excluyen los autos que ya se vendieron y solo se muestran los que están disponibles
+                                System.out.println("2.Mostrar Autos Disponibles");
+                                lista.autosDisponibles();
+                            }
+                            case 3 -> {
+                                //el usuario ingresa el modelo del coche y si está disponible, se permite la compra
+                                System.out.println("3.Comprar Auto");
+                                System.out.println("Ingrese modelo a comprar");
+                                modelo = leer.next();
+                                System.out.println("Ingrese su nombre para consolidar su compra");
+                                cliente = leer.next();
+                                lista.venderAuto(modelo, cliente);
+                            }
+                            case 4 -> {
+                                //se busca el coche por modelo y verifica que no esté disponible para poder devolverlo
+                                System.out.println("4.Devolver Auto");
+                                System.out.println("Ingrese modelo a devolver");
+                                modelo = leer.next();
+                                lista.devolverAuto(modelo);
+                            }
+                            case 5 -> {
+                                //busca por modelo de coche incluso a los que ya están vendidos y lo muestra
+                                System.out.println("5.Buscar Auto");
+                                System.out.println("Ingrese modelo a Buscar");
+                                modelo = leer.next();
+                                lista.buscar(modelo);
+                            }
+                            case 6 -> {
+                                //sale del menú del cliente
+                                System.out.println("bye bye");
+                            }
+                            //en caso de que se ingrese una opcion que no sea válida
+                            default -> System.out.println("Opcion invalida");
+                            }
+                    }while(opc!=6);
                 }
-                case 3 -> {
-                    // Muestra los autos que han sido vendidos
-                    System.out.println("3.Mostrar Autos Vendidos");
-                    lista.autosVendidos();
+                case 3-> {
+                    //sale del programa
+                    System.out.println("bye bye");
                 }
-                case 4 -> {
-                    // Muestra los autos disponibles para la venta
-                    System.out.println("4.Mostrar Autos Disponibles");
-                    lista.autosDisponibles();
-                }
-                case 5 -> {
-                    // Permite al usuario comprar un auto
-                    System.out.println("5.Vender Auto");
-                    System.out.println("Ingrese modelo a comprar");
-                    modelo = leer.next();
-                    System.out.println("Ingrese su nombre para consolidar su compra");
-                    cliente = leer.next();
-                    lista.venderAuto(modelo, cliente);
-                }
-                case 6 -> {
-                    // Permite al usuario devolver un auto previamente comprado
-                    System.out.println("6.Devolver Auto");
-                    System.out.println("Ingrese modelo a devolver");
-                    modelo = leer.next();
-                    lista.devolverAuto(modelo);
-                }
-                case 7 -> {
-                    // Permite al usuario buscar un auto por modelo
-                    System.out.println("7.Buscar Auto");
-                    System.out.println("Ingrese modelo a Buscar");
-                    modelo = leer.next();
-                    lista.buscar(modelo);
-                }
-                case 8 -> {
-                    // Sale del programa
-                    System.out.println("bye bye 🤫🧏‍♀️");
-                }
+                //en caso dde que el usuario ingrese una opcion que no sea válida
                 default -> System.out.println("Opcion invalida");
             }
-         }while(opc!=8);
+        }while(op!=3);
     }
     
 }
