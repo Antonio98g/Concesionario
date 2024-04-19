@@ -2,7 +2,7 @@ package portafoliopoo;
 
 import java.util.Scanner;
 
-public class PortafolioPoo {
+public class Main {
 
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
