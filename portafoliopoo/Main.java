@@ -1,20 +1,17 @@
 package portafoliopoo;
-
 import java.util.Scanner;
-
 /**
  * La clase Main contiene el método main que permite interactuar con la lista de autos.
  * Permite a los usuarios (concesionario y cliente) realizar diversas operaciones como agregar autos, mostrar información de autos, comprar y devolver autos, etc.
  */
 public class Main {
-
     /**
      * Método principal que permite interactuar con la lista de autos.
      */
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         ListaDeAutos lista = new ListaDeAutos();
-        int opc, op;
+        int opcion2, opcion;
         String modelo,marca, cliente;
         
         do{
@@ -23,8 +20,8 @@ public class Main {
             System.out.println("1.Concesionario");
             System.out.println("2.Cliente");
             System.out.println("3.Salir");
-            op = leer.nextInt();
-            switch(op){
+            opcion = leer.nextInt();
+            switch(opcion){
                 case 1-> {
                     //concesionario
                      do{
@@ -34,8 +31,8 @@ public class Main {
                         System.out.println("3.Mostrar Autos Vendidos");
                         System.out.println("4.Mostrar Autos Disponibles");
                         System.out.println("5.Salir");
-                        opc = leer.nextInt();
-                        switch(opc){
+                        opcion2 = leer.nextInt();
+                        switch(opcion2){
                             case 1 -> {
                                 //el vendedor agrega un nuevo auto al stock
                                 System.out.println("1.Agregar un Auto");
