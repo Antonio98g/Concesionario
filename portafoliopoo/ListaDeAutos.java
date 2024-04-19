@@ -63,7 +63,6 @@ public class ListaDeAutos {
             //recorre toda la lista hasta que encuentre el modelo del auto que ingresó el usuario
             while (!actual.getModelo().equals(dato)) {
                 actual = actual.getSiguiente();
-                cont++;
                 //si el auto no se encuentra, entonces se le indica al usuario
                 if (actual == null) {
                     System.out.println("No se encontro el modelo de auto deseado.");
