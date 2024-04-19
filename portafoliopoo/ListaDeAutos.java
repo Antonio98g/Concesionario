@@ -1,7 +1,5 @@
 package portafoliopoo; //Agrupa las clases
 
-
-
 public class ListaDeAutos {
     private Auto inicio; //Referencia al primer auto en la lista
     private Auto fin; // Referencia al ultimo auto en la lista
@@ -17,11 +15,11 @@ public class ListaDeAutos {
     }
 
     public void setInicio(Auto inicio) {
-        this.inicio = inicio; //Establece el primer auto de la lista
+        this.inicio = inicio; //Indica que la posicion del primer nodo auto de la lista
     }
 
     public Auto getFin() {
-        return fin; //Obtiene el ultimo auto de la lista
+        return fin; //Obtiene el ultimo nodo "auto" de la lista
     }
 
     public void setFin(Auto fin) {
